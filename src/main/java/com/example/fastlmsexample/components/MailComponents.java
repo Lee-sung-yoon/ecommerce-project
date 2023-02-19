@@ -15,14 +15,14 @@ public class MailComponents {
 
     private final JavaMailSender javaMailSender;
 
-    public void sendMailTest() {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("tjddbs1412@naver.com");
-        msg.setSubject("안녕하세요. 가입확인 이메일 입니다.");
-        msg.setText("안녕하세요. ()입니다.");
-
-        javaMailSender.send(msg);
-    }
+//    public void sendMailTest() {
+//        SimpleMailMessage msg = new SimpleMailMessage();
+//        msg.setTo("tjddbs1412@naver.com");
+//        msg.setSubject("안녕하세요. 가입확인 이메일 입니다.");
+//        msg.setText("안녕하세요. ()입니다.");
+//
+//        javaMailSender.send(msg);
+//    }
 
     public boolean sendMail(String mail, String subject, String text) {
 
