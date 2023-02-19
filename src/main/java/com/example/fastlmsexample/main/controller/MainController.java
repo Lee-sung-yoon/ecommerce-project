@@ -1,4 +1,4 @@
-package com.example.fastlmsexample;
+package com.example.fastlmsexample.main.controller;
 
 import com.example.fastlmsexample.components.MailComponents;
 import lombok.RequiredArgsConstructor;

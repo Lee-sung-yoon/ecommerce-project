@@ -1,5 +1,6 @@
-package com.example.fastlmsexample;
+package com.example.fastlmsexample.configuration;
 
+import com.example.fastlmsexample.FastlmsExampleApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
