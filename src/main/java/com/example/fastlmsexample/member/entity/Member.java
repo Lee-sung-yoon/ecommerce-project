@@ -26,4 +26,8 @@ public class Member {
     private boolean emailAuthYn;
     private String emailAuthKey;
     private LocalDateTime emailAuthDt;
+
+    private String resetPasswordKey;
+    private LocalDateTime resetPasswordLimitDt;
+
 }
