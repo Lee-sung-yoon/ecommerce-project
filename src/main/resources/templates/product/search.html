@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>상품 검색</title>
+  </head>
+  <body>
+    <h1> 상품 검색 </h1>
+    <div th:replace="/fragments/layout.html :: fragment-body-menu">
+
+    </div>
+
+    <form method="post">
+        <div>
+            <input type="text" name="productName" placeholder="상품명 입력" required/>
+        </div>
+        <div>
+            <select name="productCategory" required>
+                <option value="c0">카테고리 선택</option>
+                <option value="c1">전자기기</option>
+                <option value="c2">가구</option>
+                <option value="c3">식품</option>
+                <option value="c4">의류</option>
+            </select>
+        </div>
+
+        <div>
+            <button>검색</button>
+        </div>
+    </form>
+
+
+
+  </body>
+  </html>
