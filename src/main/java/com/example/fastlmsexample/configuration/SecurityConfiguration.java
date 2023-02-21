@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/", "/member/register", "/member/email-auth", "/member/find/password"
-                ,"/member/reset/password")
+                ,"/member/reset/password", "/product/search", "/product/register")
                         .permitAll();
 
         http.formLogin()

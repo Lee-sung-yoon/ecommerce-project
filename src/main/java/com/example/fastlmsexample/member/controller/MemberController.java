@@ -53,7 +53,8 @@ public class MemberController {
     }
 
     @PostMapping("/member/register")
-    public String registerSubmit(Model model, HttpServletRequest request, MemberInput parameter) {
+    public String registerSubmit(Model model, HttpServletRequest request
+            , MemberInput parameter) {
 
         boolean result = memberService.register(parameter);
         model.addAttribute("result", result);

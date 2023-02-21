@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>상품 등록</title>
+  </head>
+  <body>
+    <h1> 상품 등록 </h1>
+    <div th:replace="/fragments/layout.html :: fragment-body-menu">
+
+    </div>
+
+    <form method="post">
+        <div>
+            <input type="text" name="productName" placeholder="상품명 입력" required/>
+        </div>
+        <div>
+            <input type="text" name="productId" placeholder="상품코드 입력" required/>
+        </div>
+        <div>
+            <input type="date" name="createDt" placeholder="제조일자 입력" required/>
+        </div>
+        <div>
+            <input type="date" name="endDt" placeholder="소비기한 입력"/>
+        </div>
+
+        <div>
+            <button>상품 등록</button>
+        </div>
+    </form>
+
+
+
+  </body>
+  </html>
