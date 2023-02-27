@@ -1,8 +1,10 @@
 package com.example.fastlmsexample.member.service.Impl;
 
 import com.example.fastlmsexample.components.MailComponents;
+import com.example.fastlmsexample.member.dto.MemberDto;
 import com.example.fastlmsexample.member.entity.Member;
 import com.example.fastlmsexample.member.exception.MemberNotEmailAuthException;
+import com.example.fastlmsexample.member.mapper.MemberMapper;
 import com.example.fastlmsexample.member.model.MemberInput;
 import com.example.fastlmsexample.member.model.ResetPasswordInput;
 import com.example.fastlmsexample.member.repository.MemberRepository;
@@ -27,6 +29,7 @@ import java.util.UUID;
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final MailComponents mailComponents;
+    private final MemberMapper memberMapper;
 
     /**
      * 회원 가입(중복된 아이디가 있으면 안된다.)
@@ -72,6 +75,11 @@ public class MemberServiceImpl implements MemberService {
         }
 
         Member member = optionalMember.get();
+
+        if (member.isEmailAuthYn()) {
+            return false;
+        }
+
         member.setEmailAuthYn(true);
         member.setEmailAuthDt(LocalDateTime.now());
         memberRepository.save(member);
@@ -153,6 +161,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<MemberDto> list() {
+        MemberDto parameter = new MemberDto();
+
+        List<MemberDto> list = memberMapper.selectList(parameter);
+
+        return list;
+
+//        return memberRepository.findAll();
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Optional<Member> optionalMember = memberRepository.findById(username);
@@ -168,6 +187,10 @@ public class MemberServiceImpl implements MemberService {
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if (member.isAdminYn()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
 
         return new User(member.getUserId(), member.getPassword(), grantedAuthorities);
     }

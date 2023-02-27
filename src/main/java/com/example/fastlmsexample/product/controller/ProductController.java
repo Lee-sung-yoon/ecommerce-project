@@ -1,5 +1,9 @@
 package com.example.fastlmsexample.product.controller;
 
+import com.example.fastlmsexample.member.entity.Member;
+import com.example.fastlmsexample.product.dto.ProductDto;
+import com.example.fastlmsexample.product.entity.Product;
+import com.example.fastlmsexample.product.model.ProductParam;
 import com.example.fastlmsexample.product.model.ProductRegisterRequest;
 import com.example.fastlmsexample.product.model.ProductSearchRequest;
 import com.example.fastlmsexample.product.service.ProductService;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,7 +23,10 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/product/search")
-    public String productSearch() {
+    public String list(Model model, ProductParam parameter) {
+        List<ProductDto> products = productService.list(parameter);
+
+        model.addAttribute("list", products);
 
         return "product/search";
     }
@@ -26,7 +34,7 @@ public class ProductController {
     @PostMapping("/product/search")
     public String productSearchSubmit(Model model, ProductSearchRequest parameter) {
 
-        return "product/search_result";
+        return "product/search";
     }
 
     @GetMapping("/product/register")
@@ -44,4 +52,6 @@ public class ProductController {
 
         return "product/register_complete";
     }
+
+
 }

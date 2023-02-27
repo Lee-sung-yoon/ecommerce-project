@@ -1,8 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
       <meta charset="UTF-8">
       <title>상품 검색</title>
+      <style>
+          .list table {
+              width: 100%;
+              border-collapse: collapse;
+          }
+          .list table th, .list table td {
+              border:solid 1px #000;
+          }
+          .product-form {
+              padding: 5px 0 10px;
+              text-align: right;
+          }
+      </style>
   </head>
   <body>
     <h1> 상품 검색 </h1>
@@ -10,24 +23,48 @@
 
     </div>
 
-    <form method="post">
-        <div>
-            <input type="text" name="productName" placeholder="상품명 입력" required/>
-        </div>
-        <div>
-            <select name="productCategory" required>
-                <option value="c0">카테고리 선택</option>
-                <option value="c1">전자기기</option>
-                <option value="c2">가구</option>
-                <option value="c3">식품</option>
-                <option value="c4">의류</option>
-            </select>
+    <div class="list">
+        <div class="product-form">
+            <form method="get">
+                <select name="productType" required>
+                    <option value="all">전체</option>
+                    <option th:selected="${#strings.equals(param.productType, 'productId')}" value="productId">상품코드</option>
+                    <option th:selected="${#strings.equals(param.productType, 'productName')}" value="productName">상품명</option>
+                </select>
+
+                <input th:value="${param.productValue}" type="search" name="productValue" placeholder="상품명 입력"/>
+                <button type="submit">검색</button>
+            </form>
         </div>
 
-        <div>
-            <button>검색</button>
-        </div>
-    </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>
+                        상품코드
+                    </th>
+                    <th>
+                        상품명
+                    </th>
+                    <th>
+                        제조일자
+                    </th>
+                    <th>
+                        소비기한
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="x : ${list}">
+                    <td>1</td>
+                    <td th:text="${x.productId}">n123</td>
+                    <td th:text="${x.productName}">노트북</td>
+                    <td th:text="${x.registerDt}">2023.02.01</td>
+                    <td th:text="${x.endDt}">2023.02.18</td>
+            </tbody>
+        </table>
+    </div>
 
 
 
