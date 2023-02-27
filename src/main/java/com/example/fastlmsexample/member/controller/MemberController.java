@@ -1,6 +1,6 @@
 package com.example.fastlmsexample.member.controller;
 
-import com.example.fastlmsexample.member.entity.Member;
+import com.example.fastlmsexample.member.dto.MemberDto;
 import com.example.fastlmsexample.member.model.MemberInput;
 import com.example.fastlmsexample.member.model.ResetPasswordInput;
 import com.example.fastlmsexample.member.repository.MemberRepository;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     @RequestMapping("/member/login")
     public String login() {
@@ -76,7 +76,9 @@ public class MemberController {
     }
 
     @GetMapping("/member/info")
-    public String memberInfo() {
+    public String list(Model model) {
+        List<MemberDto> members = memberService.list();
+        model.addAttribute("list", members);
 
         return "member/info";
     }

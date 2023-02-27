@@ -5,10 +5,16 @@
         <title>Title</title>
     </head>
     <body>
-        <h1> [] 환영합니다. </h1>
-        <div th:replace="/fragments/layout.html :: fragment-body-menu">
-
+        <h1> 메인페이지 </h1>
+        <div align="right">
+            <a href="/admin/main.do">관리자 Page</a>
         </div>
+
+        <div th:replace="/fragments/layout.html :: fragment-body-menu">
+        </div>
+
+
+
 
     </body>
 </html>

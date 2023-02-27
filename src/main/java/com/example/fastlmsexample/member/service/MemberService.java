@@ -1,8 +1,11 @@
 package com.example.fastlmsexample.member.service;
 
+import com.example.fastlmsexample.member.dto.MemberDto;
 import com.example.fastlmsexample.member.model.MemberInput;
 import com.example.fastlmsexample.member.model.ResetPasswordInput;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
 
 public interface MemberService extends UserDetailsService {
 
@@ -28,4 +31,9 @@ public interface MemberService extends UserDetailsService {
      * 입력 받은 uuid 값이 유효한지 확인
      */
     boolean checkResetPassword(String uuid);
+
+    /**
+     * 로그인 한 회원에 정보 가져오기
+     */
+    List<MemberDto> list();
 }

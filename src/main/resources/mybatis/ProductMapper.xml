@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.fastlmsexample.product.mapper.ProductMapper">
+
+    <select id="selectList"
+            parameterType="com.example.fastlmsexample.product.model.ProductParam"
+            resultType="com.example.fastlmsexample.product.dto.ProductDto">
+
+        select *
+        from product
+
+        where 1 = 1
+
+            <if test="productType != null and productValue != null">
+                <choose>
+                    <when test="productType == 'productId'">
+                        and product_id like concat('%', #{productValue}, '%')
+                    </when>
+                    <when test="productType == 'productName'">
+                        and product_name like concat('%', #{productValue}, '%')
+                    </when>
+                    <otherwise>
+                        and
+                        (
+                            product_id like concat('%', #{productValue}, '%')
+                            or
+                            product_name like concat('%', #{productValue}, '%')
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+
+<!--        limit 0, 10-->
+    </select>
+</mapper>
