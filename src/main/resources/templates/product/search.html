@@ -12,8 +12,23 @@
               border:solid 1px #000;
           }
           .product-form {
+              position: relative;
               padding: 5px 0 10px;
               text-align: right;
+          }
+          .product-form .total-count {
+              position: absolute;
+              left: 0; top: 0;
+              height: 20px;
+              float: left;
+          }
+          .pager {
+              margin-top: 20px;
+              text-align: center;
+          }
+          .pager a.on {
+              font-weight: bold;
+              color: red;
           }
       </style>
   </head>
@@ -25,6 +40,7 @@
 
     <div class="list">
         <div class="product-form">
+            <p class="total-count">전체 <span th:text="${totalCount}"></span>개</p>
             <form method="get">
                 <select name="productType" required>
                     <option value="all">전체</option>
@@ -57,13 +73,21 @@
             </thead>
             <tbody>
                 <tr th:each="x : ${list}">
-                    <td>1</td>
-                    <td th:text="${x.productId}">n123</td>
+                    <td th:text="${x.seq}">1</td>
+                    <td>
+                        <a th:text="${x.productId}"
+                           th:href="${'detail.do?productId='+ x.productId}">
+                            n123</a>
+                    </td>
                     <td th:text="${x.productName}">노트북</td>
                     <td th:text="${x.registerDt}">2023.02.01</td>
                     <td th:text="${x.endDt}">2023.02.18</td>
             </tbody>
         </table>
+
+        <div class="pager" th:utext="${pager}">
+
+        </div>
     </div>
 
 

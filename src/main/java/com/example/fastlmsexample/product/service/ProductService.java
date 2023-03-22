@@ -14,4 +14,9 @@ public interface ProductService {
      * 등록된 상품 목록 가져오기
      */
     List<ProductDto> list(ProductParam parameter);
+
+    /**
+     * 상품 상세 정보
+     */
+    ProductDto detail(String productId);
 }

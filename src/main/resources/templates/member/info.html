@@ -11,6 +11,7 @@
           .list table th, .list table td {
               border:solid 1px #000;
           }
+
       </style>
   </head>
   <body>
@@ -22,6 +23,11 @@
 
         </div>
         <div class="list">
+            <div class="info-form">
+                <form method="get">
+
+                </form>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -52,10 +58,10 @@
                 <tbody>
                     <tr th:each="x : ${list}">
                         <td>1</td>
-                        <td th:text="${x.userId}">tjddbs1412@naver.com</td>
-                        <td th:text="${x.userName}">이성윤</td>
-                        <td th:text="${x.userBirth}">95.08.06</td>
-                        <td th:text="${x.phone}">010-1111-2222</td>
+                        <td th:text="${x.userId}"></td>
+                        <td th:text="${x.userName}"></td>
+                        <td th:text="${x.userBirth}"></td>
+                        <td th:text="${x.phone}"></td>
                         <td>
                             <p th:if="${x.emailAuthYn}">Y</p>
                             <p th:if="${x.emailAuthYn eq false}">N</p>

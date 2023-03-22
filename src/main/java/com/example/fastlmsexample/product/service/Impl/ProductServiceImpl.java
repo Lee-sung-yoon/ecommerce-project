@@ -10,6 +10,7 @@ import com.example.fastlmsexample.product.repository.ProductRepository;
 import com.example.fastlmsexample.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,9 +45,33 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> list(ProductParam parameter) {
+        long totalCount = productMapper.selectListCount(parameter);
+
         List<ProductDto> list = productMapper.selectList(parameter);
+        if (!CollectionUtils.isEmpty(list)) {
+            int  i = 0;
+            for (ProductDto x : list) {
+                x.setTotalCount(totalCount);
+
+                x.setSeq(totalCount - parameter.getPageStart() - i);
+                i++;
+            }
+        }
         return list;
 
 //        return productRepository.findAll();
+    }
+
+    @Override
+    public ProductDto detail(String productId) {
+
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (!optionalProduct.isPresent()) {
+            return null;
+        }
+
+        Product product = optionalProduct.get();
+
+        return ProductDto.of(product);
     }
 }
