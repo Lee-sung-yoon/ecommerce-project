@@ -1,12 +1,8 @@
 package com.example.fastlmsexample.product.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductParam {
 
     long pageIndex;
@@ -14,8 +10,6 @@ public class ProductParam {
 
     String productType;
     String productValue;
-
-    String productId;
 
 
     public long getPageStart() {

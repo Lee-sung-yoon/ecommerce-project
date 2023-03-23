@@ -1,8 +1,6 @@
 package com.example.fastlmsexample.product.controller;
 
-import com.example.fastlmsexample.member.entity.Member;
 import com.example.fastlmsexample.product.dto.ProductDto;
-import com.example.fastlmsexample.product.entity.Product;
 import com.example.fastlmsexample.product.model.ProductParam;
 import com.example.fastlmsexample.product.model.ProductRegisterRequest;
 import com.example.fastlmsexample.product.model.ProductSearchRequest;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLDataException;
 import java.util.List;
 
 @Controller
@@ -30,12 +27,11 @@ public class ProductController {
 
         List<ProductDto> products = productService.list(parameter);
 
-
         long totalCount = 0;
         if (products != null && products.size() > 0) {
             totalCount = products.get(0).getTotalCount();
         }
-        String queryString = parameter.getQueryString();
+        String queryString = "";
 
         PageUtil pageUtil = new PageUtil(totalCount, parameter.getPageSize(), parameter.getPageIndex(), queryString);
 
@@ -45,6 +41,7 @@ public class ProductController {
 
         return "product/search";
     }
+
 
     @PostMapping("/product/search")
     public String productSearchSubmit(Model model, ProductSearchRequest parameter) {
@@ -68,13 +65,4 @@ public class ProductController {
         return "product/register_complete";
     }
 
-    @GetMapping("/product/detail.do")
-    public String detail(Model model, ProductParam parameter) throws SQLDataException {
-        parameter.init();
-
-        ProductDto product = productService.detail(parameter.getProductId());
-        model.addAttribute("product", product);
-
-        return "product/detail";
-    }
 }

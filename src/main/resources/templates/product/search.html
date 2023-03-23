@@ -74,13 +74,9 @@
             <tbody>
                 <tr th:each="x : ${list}">
                     <td th:text="${x.seq}">1</td>
-                    <td>
-                        <a th:text="${x.productId}"
-                           th:href="${'detail.do?productId='+ x.productId}">
-                            n123</a>
-                    </td>
+                    <td th:text="${x.productId}">n123</td>
                     <td th:text="${x.productName}">노트북</td>
-                    <td th:text="${x.registerDt}">2023.02.01</td>
+                    <td th:text="${x.createDt}">2023.02.01</td>
                     <td th:text="${x.endDt}">2023.02.18</td>
             </tbody>
         </table>

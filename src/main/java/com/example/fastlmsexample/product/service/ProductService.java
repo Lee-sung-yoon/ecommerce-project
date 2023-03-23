@@ -1,7 +1,6 @@
 package com.example.fastlmsexample.product.service;
 
 import com.example.fastlmsexample.product.dto.ProductDto;
-import com.example.fastlmsexample.product.entity.Product;
 import com.example.fastlmsexample.product.model.ProductParam;
 import com.example.fastlmsexample.product.model.ProductRegisterRequest;
 
@@ -15,8 +14,5 @@ public interface ProductService {
      */
     List<ProductDto> list(ProductParam parameter);
 
-    /**
-     * 상품 상세 정보
-     */
-    ProductDto detail(String productId);
+
 }
