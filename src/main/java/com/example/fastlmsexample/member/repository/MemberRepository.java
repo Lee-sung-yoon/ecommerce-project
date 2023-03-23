@@ -1,5 +1,6 @@
 package com.example.fastlmsexample.member.repository;
 
+import com.example.fastlmsexample.member.dto.MemberDto;
 import com.example.fastlmsexample.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -10,6 +10,7 @@ import com.example.fastlmsexample.product.repository.ProductRepository;
 import com.example.fastlmsexample.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final MemberRepository memberRepository;
     private final ProductMapper productMapper;
 
     @Override
@@ -44,9 +44,21 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> list(ProductParam parameter) {
+        long totalCount = productMapper.selectListCount(parameter);
+
         List<ProductDto> list = productMapper.selectList(parameter);
+        if (!CollectionUtils.isEmpty(list)) {
+            int  i = 0;
+            for (ProductDto x : list) {
+                x.setTotalCount(totalCount);
+                x.setSeq(totalCount - parameter.getPageStart() - i);
+                i++;
+            }
+        }
+
         return list;
 
 //        return productRepository.findAll();
     }
+
 }

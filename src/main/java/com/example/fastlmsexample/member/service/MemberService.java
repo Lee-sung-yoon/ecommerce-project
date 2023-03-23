@@ -36,4 +36,5 @@ public interface MemberService extends UserDetailsService {
      * 로그인 한 회원에 정보 가져오기
      */
     List<MemberDto> list();
+
 }

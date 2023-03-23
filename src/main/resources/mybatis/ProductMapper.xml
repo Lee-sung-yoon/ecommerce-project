@@ -4,6 +4,34 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.fastlmsexample.product.mapper.ProductMapper">
 
+    <select id="selectListCount"
+            parameterType="com.example.fastlmsexample.product.model.ProductParam"
+            resultType="long">
+
+        select count(*)
+        from product
+        where 1 = 1
+        <if test="productType != null and productValue != null">
+            <choose>
+                <when test="productType == 'productId'">
+                    and product_id like concat('%', #{productValue}, '%')
+                </when>
+                <when test="productType == 'productName'">
+                    and product_name like concat('%', #{productValue}, '%')
+                </when>
+                <otherwise>
+                    and
+                    (
+                    product_id like concat('%', #{productValue}, '%')
+                    or
+                    product_name like concat('%', #{productValue}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+
+    </select>
+
     <select id="selectList"
             parameterType="com.example.fastlmsexample.product.model.ProductParam"
             resultType="com.example.fastlmsexample.product.dto.ProductDto">
@@ -31,7 +59,8 @@
                     </otherwise>
                 </choose>
             </if>
+            limit #{pageStart}, #{pageEnd}
 
-<!--        limit 0, 10-->
+<!--            limit 0, 10-->
     </select>
 </mapper>
