@@ -7,14 +7,14 @@
   <body>
     <div th:if="${result}">
         <h1> 회원 가입 결과</h1>
-        <div th:replace="/fragments/layout.html :: fragment-body-menu">        </div>
+        <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
         <P>회원 가입이 완료되었습니다.</P>
         <p>가입 하신 이메일을 통해 가입 완료를 해주세요.</p>
     </div>
 
     <div th:if="${result eq false}">
         <h1> 회원 가입 결과</h1>
-        <div th:replace="/fragments/layout.html :: fragment-body-menu">        </div>
+        <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
         <P>회원 가입에 실패하였습니다.</P>
         <P> 동일한 아이디가 존재합니다. 아이디를 변경 후 회원 가입을 진행 바랍니다.</P>
         <a href="/member/register">회원 가입</a>
